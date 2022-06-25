@@ -14,8 +14,6 @@
  * limitations under the License.
  ******************************************************************************/
 
-package examples;
-
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -33,7 +31,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
  * See: http://blog.xoppa.com/basic-3d-using-libgdx-2/
  * @author Xoppa
  */
-public class Basic3D implements ApplicationListener {
+public class Main implements ApplicationListener {
     public PerspectiveCamera cam;
     public ModelBatch modelBatch;
     public Model model;

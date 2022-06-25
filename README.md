@@ -1,2 +1,4 @@
-# libgdx-template
-A template project ready to use libgdx with maven
+# essence of linear algebra
+
+“The introduction of numbers as coordinates is an act of violence.”
+— Hermann Weyl
