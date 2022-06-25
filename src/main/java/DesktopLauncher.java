@@ -5,7 +5,7 @@ public class DesktopLauncher {
     public static void main (String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("LibGDX");
-        config.setWindowedMode(800, 600);
+        config.setWindowedMode(1200, 1000);
         config.setForegroundFPS(100);
 
         new Lwjgl3Application(new Main(), config);
