@@ -18,7 +18,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
 import com.badlogic.gdx.graphics.g3d.*;
@@ -27,12 +26,14 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import matrixmult.MatrixHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * See: http://blog.xoppa.com/basic-3d-using-libgdx-2/
@@ -50,12 +51,19 @@ public class Main implements ApplicationListener {
 
     public List<ModelInstance> lines = new ArrayList<>();
     public Vector3 newline = null;
+    public float[][] transform;
+    public float[][] currentTransform;
+    public float currentTransformCount;
 
     private Environment environment;
 
     private ModelInstance sphere;
 
     public List<ModelInstance> dots = new ArrayList<>();
+
+
+    static Map<ModelInstance, Vector2> vmap = new HashMap<>();
+
 
     @Override
     public void create() {
@@ -65,7 +73,7 @@ public class Main implements ApplicationListener {
         cam.position.set(300f, 300f, -200f);
         cam.lookAt(0, 0, 0);
         cam.near = 1f;
-        cam.far = 600f;
+        cam.far = 1600f;
         cam.update();
 
         environment = new Environment();
@@ -96,7 +104,7 @@ public class Main implements ApplicationListener {
             for (int y = -mul; y <= mul; y++) {
                 Model sphere1 = Helper.sphere(2);
                 var mi = new ModelInstance(sphere1);
-                mi.transform.translate(new Vector3((float) x * 20, 1f, (float) y * 20));
+                mi.transform.translate(new Vector3((float) x * 20, (float) y * 20, 1f));
                 dots.add(mi);
             }
         }
@@ -109,6 +117,30 @@ public class Main implements ApplicationListener {
             newline = null;
             System.out.println("lines size: " + lines.size());
         }
+
+        if (transform != null) {
+            currentTransform = transform;
+            vmap = new HashMap<>();
+            dots.forEach(d -> fillTranslation(d, currentTransform));
+
+            currentTransformCount = 0;
+            transform = null;
+        }
+
+        if (currentTransform != null) {
+            float dt = Gdx.graphics.getDeltaTime();
+            currentTransformCount += (dt);
+            if (currentTransformCount < 1) {
+                for (var d : dots) {
+                    var tl = d.transform.getTranslation(new Vector3());
+                    tl.x += vmap.get(d).x * dt;
+                    tl.y += vmap.get(d).y * dt;
+                    d.transform.setTranslation(tl);
+                }
+            }
+        }
+
+
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
@@ -165,6 +197,15 @@ public class Main implements ApplicationListener {
         blendingAttribute.opacity = opacity;
 
         return instance1;
+    }
+
+
+    static void fillTranslation(ModelInstance model, float[][] matrix) {
+        Vector3 translation = model.transform.getTranslation(new Vector3());
+        var v2 = MatrixHelper.matrixToV2(matrix);
+        float tx = -translation.x + translation.x * v2.x;
+        float ty = -translation.y + translation.y * v2.y;
+        vmap.put(model, new Vector2(tx, ty));
     }
 }
 
