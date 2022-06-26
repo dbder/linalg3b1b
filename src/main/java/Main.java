@@ -110,6 +110,7 @@ public class Main implements ApplicationListener {
         }
     }
 
+    float delay = 0;
     @Override
     public void render() {
         if (newline != null) {
@@ -117,6 +118,18 @@ public class Main implements ApplicationListener {
             newline = null;
             System.out.println("lines size: " + lines.size());
         }
+
+        delay += Gdx.graphics.getDeltaTime();
+        if (delay < .1) {
+            return;
+        }
+        delay = 0;
+
+        dots.forEach(d -> {
+            var tl = d.transform.getTranslation(new Vector3());
+            var res = MatrixHelper.applyV3(MatrixHelper.rotateX1Degree, tl);
+            d.transform.setTranslation(res);
+        });
 
         if (transform != null) {
             currentTransform = transform;
