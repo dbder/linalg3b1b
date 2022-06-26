@@ -27,29 +27,33 @@ import linal.network.RestController;
 import linal.visuals.CoordSystem;
 import linal.visuals.Dots;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * linal.Main class
  */
-public class Main extends ApplicationAdapter {
+public class Main extends ApplicationAdapter implements Drawable {
     public PerspectiveCamera cam;
     private ModelBatch modelBatch;
-    public RestController restController;
     private Environment environment;
-    private CoordSystem coordSystem;
     private Dots dots;
+    private List<Drawable> drawables;
 
     @Override
     public void create() {
         modelBatch = new ModelBatch();
         environment = EnvironmentHelper.create();
         cam = CameraHelper.create();
-        restController = new RestController(this);
+        new RestController(this);
 
         // drawables
-        coordSystem = new CoordSystem();
         dots = new Dots();
+        drawables = List.of(
+                new CoordSystem(),
+                dots
+        );
+
     }
 
     @Override
@@ -62,8 +66,7 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         modelBatch.begin(cam);
-        coordSystem.draw(modelBatch, environment);
-        dots.draw(modelBatch, environment);
+        draw(modelBatch, environment);
         modelBatch.end();
 
     }
@@ -73,5 +76,9 @@ public class Main extends ApplicationAdapter {
         modelBatch.dispose();
     }
 
+    @Override
+    public void draw(ModelBatch batch, Environment environment) {
+        drawables.forEach(d -> d.draw(batch, environment));
+    }
 }
 
