@@ -15,7 +15,8 @@ import java.util.List;
 
 public class Dots implements Drawable, Updatable {
 
-    public List<ModelInstance> dots = new ArrayList<>();
+    public List<Dot> dots = new ArrayList<>();
+
 
     public Dots() {
         int mul = 10;
@@ -25,16 +26,14 @@ public class Dots implements Drawable, Updatable {
                 Model sphere1 = ShapeHelper.createSphere(2);
                 var mi = new ModelInstance(sphere1);
                 mi.transform.translate(new Vector3(20f * x, 20f * y, 1f));
-                dots.add(mi);
+                dots.add(new Dot(mi));
             }
         }
     }
 
     @Override
     public void draw(ModelBatch batch, Environment environment) {
-        for (ModelInstance dot : dots) {
-            batch.render(dot, environment);
-        }
+        dots.forEach(d -> d.draw(batch, environment));
     }
 
     @Override
@@ -46,10 +45,6 @@ public class Dots implements Drawable, Updatable {
     }
 
     private void apply(float[][] matrix) {
-        dots.forEach(d -> {
-            var tl = d.transform.getTranslation(new Vector3());
-            var res = MatrixHelper.applyV3(matrix, tl);
-            d.transform.setTranslation(res);
-        });
+        dots.forEach(d -> d.apply(matrix));
     }
 }
