@@ -25,4 +25,8 @@ class Dot implements Drawable {
         var res = MatrixHelper.applyV3(matrix, tl);
         modelInstance.transform.setTranslation(res);
     }
+
+    public void apply(Matrix matrix) {
+        apply(matrix.grid);
+    }
 }
