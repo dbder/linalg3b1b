@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import linal.core.Drawable;
 import linal.helpers.MatrixHelper;
 
-public class Dot implements Drawable {
+class Dot implements Drawable {
 
     private final ModelInstance modelInstance;
 

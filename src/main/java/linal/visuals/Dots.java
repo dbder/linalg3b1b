@@ -16,17 +16,23 @@ import java.util.List;
 public class Dots implements Drawable, Updatable {
 
     public List<Dot> dots = new ArrayList<>();
+    private static final float SPACING = 30f;
+    private static final int XMUL = 1;
+    private static final int YMUL = 10;
+    private static final int ZMUL = 3;
 
 
     public Dots() {
-        int mul = 10;
+        int mul = 3;
         // create a lot of dots !
-        for (int x = -mul; x <= mul; x++) {
-            for (int y = -mul; y <= mul; y++) {
-                Model sphere1 = ShapeHelper.createSphere(2);
-                var mi = new ModelInstance(sphere1);
-                mi.transform.translate(new Vector3(20f * x, 20f * y, 1f));
-                dots.add(new Dot(mi));
+        for (int x = -XMUL; x <= XMUL; x++) {
+            for (int y = -YMUL; y <= YMUL; y++) {
+                for (int z = -ZMUL; z <= ZMUL; z++) {
+                    Model sphere1 = ShapeHelper.createSphere(2);
+                    var mi = new ModelInstance(sphere1);
+                    mi.transform.translate(new Vector3(SPACING * x, SPACING * y, SPACING * z));
+                    dots.add(new Dot(mi));
+                }
             }
         }
     }
@@ -42,9 +48,10 @@ public class Dots implements Drawable, Updatable {
         apply(MatrixHelper.rotateY1Degree);
         apply(MatrixHelper.rotateZ1Degree);
         apply(MatrixHelper.rotateZ1Degree);
+        apply(MatrixHelper.shear);
     }
 
-    private void apply(float[][] matrix) {
+    public void apply(float[][] matrix) {
         dots.forEach(d -> d.apply(matrix));
     }
 }

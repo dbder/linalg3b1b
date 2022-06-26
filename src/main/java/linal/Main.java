@@ -23,11 +23,11 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import linal.core.Drawable;
 import linal.helpers.CameraHelper;
 import linal.helpers.EnvironmentHelper;
+import linal.helpers.MatrixHelper;
 import linal.network.RestController;
 import linal.visuals.CoordSystem;
 import linal.visuals.Dots;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,6 +53,7 @@ public class Main extends ApplicationAdapter implements Drawable {
                 new CoordSystem(),
                 dots
         );
+        dots.apply(MatrixHelper.shear);
 
     }
 

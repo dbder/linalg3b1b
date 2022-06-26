@@ -35,11 +35,12 @@ the multiplier e.g. 2/3  2 -1.8
 ## Linear Combinations
 - combination of 2 vectorsje
 ## Span
-## Bases
-## linearly dependant -> redundant
-## linearly independant -> notredundant
+## Bases i^ j^ ( i hat, j hat) 
+## linearly dependant -> will end in nullspace
+## linearly independant -> will give unique/reversable result
 ## transformation(function) inputvector -> outputvector
-
+## linear transformation -> using a matrix to transform item(s) such that the relative distance stays the same
+## shear 
 
 ## challenges REST
 - well you could ask to supply the eigenvectors given a certain transformation.
