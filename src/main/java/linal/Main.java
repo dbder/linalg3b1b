@@ -1,4 +1,4 @@
-/*******************************************************************************
+package linal; /*******************************************************************************
  * Copyright 2011 See AUTHORS file.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,13 +20,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import helpers.CameraHelper;
-import helpers.EnvironmentHelper;
-import visuals.CoordSystem;
-import visuals.Dots;
+import linal.helpers.CameraHelper;
+import linal.helpers.EnvironmentHelper;
+import linal.network.RestController;
+import linal.visuals.CoordSystem;
+import linal.visuals.Dots;
 
 /**
- * Main class
+ * linal.Main class
  */
 public class Main extends ApplicationAdapter {
     public PerspectiveCamera cam;

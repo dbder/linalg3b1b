@@ -1,4 +1,4 @@
-package helpers;
+package linal.helpers;
 
 import com.badlogic.gdx.math.Vector3;
 

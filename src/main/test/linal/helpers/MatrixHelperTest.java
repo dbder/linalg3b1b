@@ -1,7 +1,7 @@
-package matrixmult;
+package linal.helpers;
 
 import com.badlogic.gdx.math.Vector3;
-import helpers.MatrixHelper;
+import linal.helpers.MatrixHelper;
 import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static helpers.MatrixHelper.*;
+import static linal.helpers.MatrixHelper.*;
 
 class MatrixHelperTest {
 

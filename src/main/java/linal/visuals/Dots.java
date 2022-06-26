@@ -1,13 +1,13 @@
-package visuals;
+package linal.visuals;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Vector3;
-import core.Drawable;
-import helpers.ShapeHelper;
-import helpers.MatrixHelper;
+import linal.core.Drawable;
+import linal.helpers.ShapeHelper;
+import linal.helpers.MatrixHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,7 @@ public class Dots implements Drawable {
     public void update(float dt) {
         apply(MatrixHelper.rotateX1Degree);
         apply(MatrixHelper.rotateY1Degree);
+        apply(MatrixHelper.rotateZ1Degree);
         apply(MatrixHelper.rotateZ1Degree);
     }
 

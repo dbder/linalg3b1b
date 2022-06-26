@@ -1,5 +1,7 @@
-import com.badlogic.gdx.math.Vector3;
+package linal.network;
+
 import io.javalin.Javalin;
+import linal.Main;
 
 public class RestController {
 

@@ -1,4 +1,4 @@
-package core;
+package linal.core;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;

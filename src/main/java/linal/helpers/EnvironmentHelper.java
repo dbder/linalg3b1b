@@ -1,4 +1,4 @@
-package helpers;
+package linal.helpers;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
