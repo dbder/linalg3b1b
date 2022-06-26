@@ -13,6 +13,8 @@ import linal.helpers.MatrixHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import static linal.helpers.MatrixHelper.*;
+
 public class Dots implements Drawable, Updatable {
 
     public List<Dot> dots = new ArrayList<>();
@@ -44,11 +46,12 @@ public class Dots implements Drawable, Updatable {
 
     @Override
     public void update(float dt) {
-        apply(MatrixHelper.rotateX1Degree);
-        apply(MatrixHelper.rotateY1Degree);
-        apply(MatrixHelper.rotateZ1Degree);
-        apply(MatrixHelper.rotateZ1Degree);
-        apply(MatrixHelper.shear);
+        apply(Matrix.of(rotateX1Degree).apply(Matrix.of(rotateY1Degree)).apply(Matrix.of(rotateZ1Degree)).grid);
+//        apply(rotateX1Degree);
+//        apply(rotateY1Degree);
+//        apply(rotateZ1Degree);
+//        apply(rotateZ1Degree);
+//        apply(MatrixHelper.shear);
     }
 
     public void apply(float[][] matrix) {
