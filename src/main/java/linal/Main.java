@@ -20,11 +20,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import linal.core.Drawable;
 import linal.helpers.CameraHelper;
 import linal.helpers.EnvironmentHelper;
 import linal.network.RestController;
 import linal.visuals.CoordSystem;
 import linal.visuals.Dots;
+
+import java.util.List;
 
 /**
  * linal.Main class
@@ -36,7 +39,6 @@ public class Main extends ApplicationAdapter {
     private Environment environment;
     private CoordSystem coordSystem;
     private Dots dots;
-
 
     @Override
     public void create() {
