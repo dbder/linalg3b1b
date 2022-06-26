@@ -1,5 +1,5 @@
 # essence of linear algebra
-
+## https://www.3blue1brown.com/topics/linear-algebra
 “The introduction of numbers as coordinates is an act of violence.”
 — Hermann Weyl 
 
@@ -40,7 +40,13 @@ the multiplier e.g. 2/3  2 -1.8
 ## linearly independant -> will give unique/reversable result
 ## transformation(function) inputvector -> outputvector
 ## linear transformation -> using a matrix to transform item(s) such that the relative distance stays the same
-## shear 
+## shear
+## composition
+- not commutative ( except 3d rotation ?? ) 
+- not associative
+- is processed like function (right to left)
+
+<img src="compositionmatrix.png" alt="Markdown Monster icon" />        
 
 ## challenges REST
 - well you could ask to supply the eigenvectors given a certain transformation.

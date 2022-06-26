@@ -59,17 +59,10 @@ public class Main extends ApplicationAdapter implements Drawable {
 
     @Override
     public void render() {
-
         //update
         dots.update(Gdx.graphics.getDeltaTime());
-
         //render
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        modelBatch.begin(cam);
         draw(modelBatch, environment);
-        modelBatch.end();
-
     }
 
     @Override
@@ -77,9 +70,16 @@ public class Main extends ApplicationAdapter implements Drawable {
         modelBatch.dispose();
     }
 
+    /**
+     * draws everything kinda recursive
+     */
     @Override
     public void draw(ModelBatch batch, Environment environment) {
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        modelBatch.begin(cam);
         drawables.forEach(d -> d.draw(batch, environment));
+        modelBatch.end();
     }
 }
 
