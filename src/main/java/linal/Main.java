@@ -51,17 +51,14 @@ public class Main extends ApplicationAdapter implements Drawable {
 
         // drawables
         dots = new Dots();
-        drawables = List.of(
-                new CoordSystem(),
-                dots
-        );
+        drawables = List.of(new CoordSystem(), dots);
         dots.apply(MatrixHelper.shear);
 
         // fill the commands
         commandHandlerManager = new CommandHandlerManager();
-        commandHandlerManager.put("camera.x", i -> cam.position.x = (int) i);
-        commandHandlerManager.put("camera.y", i -> cam.position.y = (int) i);
-        commandHandlerManager.put("camera.z", i -> cam.position.z = (int) i);
+        commandHandlerManager.put("camera.x", i -> cam.position.x = i, Integer.class);
+        commandHandlerManager.put("camera.y", i -> cam.position.y = i, Integer.class);
+        commandHandlerManager.put("camera.z", i -> cam.position.z = i, Integer.class);
 
     }
 

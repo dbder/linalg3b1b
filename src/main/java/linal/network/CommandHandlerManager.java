@@ -11,7 +11,7 @@ public class CommandHandlerManager {
     /**
      * Here commands are stored to be picked up with String keys. ( e.g. camera.x )
      */
-    public Map<String, Consumer<Object>> consumerMap = new HashMap<>();
+    public Map<String, Consumer<?>> consumerMap = new HashMap<>();
 
     /**
      * Buffer for commands to be consumed by main applciaiton.
@@ -19,11 +19,12 @@ public class CommandHandlerManager {
      */
     private ConcurrentLinkedQueue<Command> queue = new ConcurrentLinkedQueue();
 
-    public void put(String string, Consumer<Object> consumer) {
+    public <T> T put(String string, Consumer<T> consumer, Class<T> clazz) {
         consumerMap.put(string, consumer);
+        return null;
     }
 
-    public void queueCommand(Object o, Consumer<Object> consumer) {
+    public void queueCommand(Object o, Consumer<?> consumer) {
         queue.add(new Command(consumer, o));
         System.out.println(queue.size());
     }
@@ -34,7 +35,7 @@ public class CommandHandlerManager {
     public void update() {
         while (!queue.isEmpty()) {
             Command poll = queue.poll();
-            poll.consumer().accept(poll.object());
+            poll.run();
         }
     }
 
