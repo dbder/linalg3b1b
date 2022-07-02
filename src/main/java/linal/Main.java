@@ -24,6 +24,7 @@ import linal.core.Drawable;
 import linal.helpers.CameraHelper;
 import linal.helpers.EnvironmentHelper;
 import linal.helpers.MatrixHelper;
+import linal.network.CommandHandlerManager;
 import linal.network.RestController;
 import linal.visuals.CoordSystem;
 import linal.visuals.Dots;
@@ -39,6 +40,7 @@ public class Main extends ApplicationAdapter implements Drawable {
     private Environment environment;
     private Dots dots;
     private List<Drawable> drawables;
+    public CommandHandlerManager commandHandlerManager;
 
     @Override
     public void create() {
@@ -55,21 +57,18 @@ public class Main extends ApplicationAdapter implements Drawable {
         );
         dots.apply(MatrixHelper.shear);
 
+        // fill the commands
+        commandHandlerManager = new CommandHandlerManager();
+        commandHandlerManager.put("camera.x", i -> cam.position.x = (int) i);
+        commandHandlerManager.put("camera.y", i -> cam.position.y = (int) i);
+        commandHandlerManager.put("camera.z", i -> cam.position.z = (int) i);
+
     }
 
     @Override
     public void render() {
-
-        //update
-        dots.update(Gdx.graphics.getDeltaTime());
-
-        //render
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        modelBatch.begin(cam);
+        update();
         draw(modelBatch, environment);
-        modelBatch.end();
-
     }
 
     @Override
@@ -77,9 +76,22 @@ public class Main extends ApplicationAdapter implements Drawable {
         modelBatch.dispose();
     }
 
+    /**
+     * draws everything kinda recursive
+     */
     @Override
     public void draw(ModelBatch batch, Environment environment) {
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        modelBatch.begin(cam);
         drawables.forEach(d -> d.draw(batch, environment));
+        modelBatch.end();
+    }
+
+    public void update() {
+        commandHandlerManager.update();
+        cam.update();
+        dots.update(Gdx.graphics.getDeltaTime());
     }
 }
 
