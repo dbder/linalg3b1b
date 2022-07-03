@@ -1,32 +1,32 @@
-package linal.typeconfig;
+package linal.specs;
 
-public record TypeConfigDecimal(
+public record SpecDecimal(
         String key,
-        ConfigType.Type type,
+        ISpec.Type type,
         Float sliderMin,
         Float sliderMax,
         float initial
-) implements ConfigType {
+) implements ISpec {
 
-    public TypeConfigDecimal {
+    public SpecDecimal {
         type = Type.DECIMAL;
         if (sliderMin == null) sliderMin = -1000f;
         if (sliderMax == null) sliderMax = 1000f;
     }
 
-    public TypeConfigDecimal(String key, float initial) {
+    public SpecDecimal(String key, float initial) {
         this(key, null, null, null, initial);
     }
 
-    public TypeConfigDecimal(String key) {
+    public SpecDecimal(String key) {
         this(key, null, null, null, 0);
     }
-    public TypeConfigDecimal(String key, float sliderMin, float sliderMax, float initial) {
+    public SpecDecimal(String key, float sliderMin, float sliderMax, float initial) {
         this(key, null, sliderMin, sliderMax, 0);
     }
 
     public static void main(String[] args) {
-        var t = new TypeConfigDecimal("mykey");
+        var t = new SpecDecimal("mykey");
         System.out.println(t);
     }
 }

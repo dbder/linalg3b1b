@@ -1,37 +1,37 @@
-package linal.typeconfig;
+package linal.specs;
 
-public record TypeConfigString(
+public record SpecString(
         String key,
         Type type,
         String initial,
         Integer minLength,
         Integer maxLength
-) implements ConfigType {
+) implements ISpec {
 
-    public TypeConfigString {
+    public SpecString {
         type = Type.STRING;
         if (minLength == null) minLength = 2;
         if (maxLength == null) maxLength = 2;
         if (initial == null) initial = "Dummy";
     }
 
-    public TypeConfigString(String key, String initial) {
+    public SpecString(String key, String initial) {
         this(key, null,  initial, null, null);
     }
 
-    public TypeConfigString(String key) {
+    public SpecString(String key) {
         this(key, null, null, null, null);
     }
 
-    public TypeConfigString(String key, int minLength, int maxLength) {
+    public SpecString(String key, int minLength, int maxLength) {
         this(key, null, null, minLength, maxLength);
     }
-    public TypeConfigString(String key, String initial, int minLength, int maxLength) {
+    public SpecString(String key, String initial, int minLength, int maxLength) {
         this(key, null, initial, minLength, maxLength);
     }
 
     public static void main(String[] args) {
-        var t = new TypeConfigString("mykey");
+        var t = new SpecString("mykey");
         System.out.println(t);
     }
 }

@@ -1,6 +1,6 @@
-package linal.typeconfig;
+package linal.specs;
 
-public interface ConfigType {
+public interface ISpec {
     enum Type {
         DECIMAL,
         BOOLEAN,
