@@ -56,9 +56,10 @@ public class Main extends ApplicationAdapter implements Drawable {
 
         // fill the commands
         commandHandlerManager = new CommandHandlerManager();
-        commandHandlerManager.put("camera.x", i -> cam.position.x = i, Integer.class);
-        commandHandlerManager.put("camera.y", i -> cam.position.y = i, Integer.class);
-        commandHandlerManager.put("camera.z", i -> cam.position.z = i, Integer.class);
+        commandHandlerManager.put("camera.x", (Integer i) -> cam.position.x = i);
+        commandHandlerManager.put("camera.x", (Integer i) -> cam.position.x = i);
+        commandHandlerManager.put("camera.y", (Integer i) -> cam.position.y = i);
+        commandHandlerManager.put("camera.z", (Integer i) -> cam.position.z = i);
 
     }
 
