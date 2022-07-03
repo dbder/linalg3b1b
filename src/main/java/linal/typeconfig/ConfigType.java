@@ -1,4 +1,4 @@
-package linal.network;
+package linal.typeconfig;
 
 public interface ConfigType {
     enum Type {
