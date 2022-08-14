@@ -18,18 +18,11 @@ public class Matrix {
 
     public Matrix apply(Matrix matrix) {
         var tmpg = new float[3][3];
-        var tmpv = getNthColumn(0);
-        MatrixHelper.applyV3(matrix.grid, tmpv);
-        writeNthColumn(0, tmpv, tmpg);
-
-        tmpv = getNthColumn(1);
-        MatrixHelper.applyV3(matrix.grid, tmpv);
-        writeNthColumn(1, tmpv, tmpg);
-
-        tmpv = getNthColumn(2);
-        MatrixHelper.applyV3(matrix.grid, tmpv);
-        writeNthColumn(2, tmpv, tmpg);
-        this.grid = tmpg;
+        for (int i = 0; i < 3; i++) {
+            var tmpv = getNthColumn(0);
+            MatrixHelper.applyV3(matrix.grid, tmpv);
+            writeNthColumn(0, tmpv, tmpg);
+        }
         return this;
     }
 

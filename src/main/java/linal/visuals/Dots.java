@@ -46,12 +46,10 @@ public class Dots implements Drawable, Updatable {
 
     @Override
     public void update(float dt) {
-        apply(Matrix.of(rotateX1Degree).apply(Matrix.of(rotateY1Degree)).apply(Matrix.of(rotateZ1Degree)).grid);
-//        apply(rotateX1Degree);
-//        apply(rotateY1Degree);
-//        apply(rotateZ1Degree);
-//        apply(rotateZ1Degree);
-//        apply(MatrixHelper.shear);
+        apply(Matrix.of(rotateX1Degree)
+                .apply(Matrix.of(rotateY1Degree))
+                .apply(Matrix.of(rotateZ1Degree)).grid
+        );
     }
 
     public void apply(float[][] matrix) {
